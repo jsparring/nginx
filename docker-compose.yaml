@@ -1,0 +1,32 @@
+version: '3'
+
+services: 
+
+  proxy:
+    build:
+      context: ./nginx
+    restart: always
+    ports:
+      - '7999:7999'
+  
+  client:
+    build:
+      context: ./JSparring
+    restart: on-failure
+  
+  apiserver:
+    build:
+      context: ./apiServer
+    restart: on-failure
+  
+  websocket:
+    build:
+      context: ./websocket
+    restart: on-failure
+    ports:
+      - '8001:8001'
+  
+  testingapi:
+    build:
+      context: ./testingAPI
+    restart: on-failure
